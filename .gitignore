@@ -1,18 +1,66 @@
-*.log
-wp-config.php
-wp-content/advanced-cache.php
-wp-content/backup-db/
-wp-content/backups/
-wp-content/blogs.dir/
-wp-content/cache/
-wp-content/upgrade/
-wp-content/uploads/
-wp-content/wp-cache-config.php
-wp-content/plugins/hello.php
+# PHPStorm file
+.idea
 
-/.htaccess
-/license.txt
-/readme.html
-/sitemap.xml
-/sitemap.xml.gz
+# exclude all web
+/web/*
 
+# except robots.txt
+!/web/robots.txt
+
+# except favicons
+!/web/android-chrome-36x36.png
+!/web/android-chrome-48x48.png
+!/web/android-chrome-72x72.png
+!/web/android-chrome-96x96.png
+!/web/android-chrome-144x144.png
+!/web/android-chrome-192x192.png
+!/web/apple-touch-icon.png
+!/web/apple-touch-icon-57x57.png
+!/web/apple-touch-icon-60x60.png
+!/web/apple-touch-icon-72x72.png
+!/web/apple-touch-icon-76x76.png
+!/web/apple-touch-icon-114x114.png
+!/web/apple-touch-icon-120x120.png
+!/web/apple-touch-icon-144x144.png
+!/web/apple-touch-icon-152x152.png
+!/web/apple-touch-icon-180x180.png
+!/web/apple-touch-icon-precomposed.png
+!/web/browserconfig.xml
+!/web/favicon.ico
+!/web/favicon-16x16.png
+!/web/favicon-32x32.png
+!/web/favicon-96x96.png
+!/web/favicon-160x160.png
+!/web/manifest.json
+!/web/mstile-70x70.png
+!/web/mstile-144x144.png
+!/web/mstile-150x150.png
+!/web/mstile-310x150.png
+!/web/mstile-310x310.png
+!/web/safari-pinned-tab.svg
+
+# except /web/wp-content/
+!/web/wp-content/
+
+# exclude all wp-content
+/web/wp-content/*
+
+# except maintenance page
+!/web/wp-content/maintenance.php
+
+# except themes
+!/web/wp-content/themes/
+
+# except plugins
+!/web/wp-content/plugins/
+/web/wp-content/plugins/*
+
+# exclude themes
+/web/wp-content/themes/*
+
+# except specific themes
+!/web/wp-content/themes/wp-product-theme/
+
+# exclude compass cache
+/compass/.sass-cache/
+/compass/compass_app_log.txt
