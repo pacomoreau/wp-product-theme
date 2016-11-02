@@ -13,6 +13,9 @@
 require_once('helpers/helpers.php');
 require_once('helpers/class-tgm-plugin-activation.php');
 
+// cpt
+require_once('custom-post-types/product.php');
+
 // hooks
 if (is_super_admin()) {
   add_action('init', 'wppt_load_textdomain', 1);
