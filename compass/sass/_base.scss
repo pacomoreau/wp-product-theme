@@ -1,0 +1,42 @@
+@import "compass/typography/lists";
+@import "compass/utilities";
+@import "compass/css3";
+@import "compass/css3/transition";
+
+$container-width          : 960px;
+$body-font-family         : sans-serif;
+$body-font-size           : 16px;
+$color                    : #000;
+// Transitions
+$default-transition       : 0.25s;
+
+/*
+ * Mixins / Functions
+ * ************************************************************************* */
+
+@mixin ir {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+
+@function pxtoem($target, $context : 16){
+  @return ($target/$context)+0em;
+}
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+

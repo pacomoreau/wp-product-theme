@@ -1,0 +1,61 @@
+/*
+ * WordPress theme 
+ * Styles
+ *
+ * @package    wp-product-theme 
+ * @subpackage wordpress theme
+ * @author     pacomoreau
+ *
+ */
+
+@import "compass/reset";
+@import "base";
+
+/*
+ * Structure
+ * ************************************************************************* */
+
+body {
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  line-height: 1.25em;
+  color: $color;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * General
+ * ************************************************************************* */
+
+strong, b {
+  font-weight: bold;
+}
+
+em, i {
+  font-style: italic;
+}
+
+a, div, h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25em;
+}
+
+.sup {
+  vertical-align: super;
+}
+
+p {
+  line-height: 1.25em;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
