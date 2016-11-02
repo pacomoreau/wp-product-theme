@@ -27,8 +27,6 @@ add_filter('pre_option_image_default_link_type', function () { return 'none'; })
 add_action('after_setup_theme', 'wppt_theme_init');
 remove_filter('widget_title', 'esc_html');
 add_filter('the_generator', function () { return ''; });
-add_filter('status_header', 'wppt_no_redirect_guess_404_permalink');
-add_filter('login_errors', 'wppt_login_message');
 // clean header
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('admin_print_scripts', 'print_emoji_detection_script');
@@ -36,19 +34,11 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_styles', 'print_emoji_styles');
 remove_action('wp_head', 'wp_generator');
 
-function wppt_no_redirect_guess_404_permalink($header){
-  global $wp_query;
-
-  if( is_404() )
-    unset( $wp_query->query_vars['name'] );
-
-  return $header;
-}
-
 // theme setup
 function wppt_theme_init() {
   add_theme_support('post-thumbnails');
   add_theme_support('title-tag');
+  load_theme_textdomain('wp-product-theme', get_template_directory() . '/languages');
 
   add_theme_support('html5', array(
     'search-form',
@@ -59,6 +49,7 @@ function wppt_theme_init() {
   ));
 }
 
+// enqueue css, js
 function wppt_add_my_stylesheet() {
   // styles
   wp_enqueue_style('screen', get_template_directory_uri() . '/styles/screen.css', array(), '1.0', 'all');
@@ -75,6 +66,7 @@ register_nav_menus(
   )
 );
 
+// tgmpa, for theme plugins
 function wppt_theme_register_required_plugins() {
   $plugins = array(
     array(
