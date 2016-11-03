@@ -27,12 +27,20 @@ add_filter('pre_option_image_default_link_type', function () { return 'none'; })
 add_action('after_setup_theme', 'wppt_theme_init');
 remove_filter('widget_title', 'esc_html');
 add_filter('the_generator', function () { return ''; });
+// specific login styles
+add_action('login_enqueue_scripts', 'wppt_custom_login_css');
+add_filter('login_headerurl', function () { return get_bloginfo('url'); });
+add_filter('login_headertitle', function () { return get_bloginfo('name'); });
 // clean header
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('admin_print_scripts', 'print_emoji_detection_script');
 remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_styles', 'print_emoji_styles');
 remove_action('wp_head', 'wp_generator');
+
+function wppt_custom_login_css()  {
+  wp_enqueue_style('wppt_login', get_template_directory_uri() . '/styles/login.css', false);
+}
 
 // theme setup
 function wppt_theme_init() {
