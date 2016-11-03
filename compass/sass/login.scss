@@ -24,7 +24,7 @@ a {
 
 body {
   background: #000 url(images/eclipse.jpg) center center no-repeat;
-  background-size: contain;
+  background-size: cover;
 
   &.login {
     div#login {
