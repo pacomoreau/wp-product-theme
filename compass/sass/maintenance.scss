@@ -1,0 +1,42 @@
+/*
+ * WordPress theme
+ * Maintenance page styles
+ *
+ * @package    wp-product-theme
+ * @subpackage wordpress theme
+ * @author     pacomoreau
+ *
+ */
+
+@import "compass/reset";
+@import "base";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  line-height: 1.25em;
+  color: $color;
+  -webkit-font-smoothing: antialiased;
+  background: #000 url(images/eclipse.jpg) center center no-repeat;
+  background-size: cover;
+}
+
+#main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  max-width: 350px;
+  @include transform(translate(-50%, -50%));
+  text-align: center;
+  color: #fff;
+
+  .page-title {
+    margin-bottom: 1em;
+    font-size: pxtoem(32);
+  }
+}
