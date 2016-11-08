@@ -13,8 +13,9 @@
 require_once('helpers/helpers.php');
 require_once('helpers/class-tgm-plugin-activation.php');
 
-// cpt
+// cpt / tax
 require_once('custom-post-types/product.php');
+require_once('custom-post-types/range.php');
 
 // hooks
 if (is_super_admin()) {
@@ -23,6 +24,7 @@ if (is_super_admin()) {
 }
 remove_action('wp_head', 'rest_output_link_wp_head');
 add_action('wp_enqueue_scripts', 'wppt_add_my_stylesheet');
+add_action('admin_enqueue_scripts', 'wppt_add_my_admin_stylesheet');
 add_filter('pre_option_image_default_link_type', function () { return 'none'; });
 add_action('after_setup_theme', 'wppt_theme_init');
 remove_filter('widget_title', 'esc_html');
@@ -65,6 +67,12 @@ function wppt_add_my_stylesheet() {
   // js
   wp_enqueue_script('jquery');
   wp_enqueue_script('scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
+}
+
+// admin enqueue js
+function wppt_add_my_admin_stylesheet() {
+  wp_enqueue_media();
+  wp_enqueue_script('admin', get_template_directory_uri() . '/js/admin.js', array('jquery'));
 }
 
 // menus

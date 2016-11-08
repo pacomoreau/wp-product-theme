@@ -9,7 +9,7 @@
  *
  */
 
-function wppt_register_produit() {
+function wppt_register_product() {
 
   $labels = array(
     'name'                => __('Produits', 'wp-product-theme'),
@@ -36,22 +36,21 @@ function wppt_register_produit() {
     'capability_type'     => 'page',
     'hierarchical'        => false,
     'exclude_from_search' => true,
-    'taxonomies'          => array('post_tag'),
     'menu_icon'           => 'dashicons-lightbulb',
-    'supports'            => array('title', 'excerpt', 'editor', 'thumbnail', 'page-attributes'),
+    'supports'            => array('title', 'editor', 'thumbnail', 'page-attributes'),
   );
 
   register_post_type('product', $args);
 
 }
-add_action('init', 'wppt_register_produit');
+add_action('init', 'wppt_register_product');
 
 /**
  * Metas (meta-box).
  * @param $meta_boxes
  * @return array
  */
-function wppt_produit_register_meta_boxes($meta_boxes) {
+function wppt_product_register_meta_boxes($meta_boxes) {
   $prefix = '_pr_';
   $meta_boxes[] = array(
     'id'        => 'product_infos',
@@ -61,33 +60,65 @@ function wppt_produit_register_meta_boxes($meta_boxes) {
     'priority'  => 'high',
     'fields'    => array(
       array(
+        'name'              => __('Ref.', 'wp-product-theme'),
+        'id'                => $prefix . 'ref',
+        'type'              => 'text',
+      ),
+      array(
         'name'              => __('Images produit', 'wp-product-theme'),
         'id'                => $prefix . 'images',
         'type'              => 'image_advanced',
         'max_file_uploads'  => 10,
       ),
       array(
-        'name'              => __('Prix (€)', 'wp-product-theme'),
-        'id'                => $prefix . 'price',
-        'type'              => 'number',
-        'step'              => 'any',
-        'min'               => 0,
+        'name'             => __('Notice de montage', 'wp-product-theme'),
+        'id'               => $prefix . 'notice',
+        'type'             => 'file_advanced',
+        'max_file_uploads' => 1,
+      ),
+      array(
+        'name'             => __('Fiche technique', 'wp-product-theme'),
+        'id'               => $prefix . 'tech',
+        'type'             => 'file_advanced',
+        'max_file_uploads' => 1,
       ),
     ),
-    'validation' => array(
-      'rules'    => array(
-        $prefix . 'price' => array(
-          'required'  => true,
-        ),
-      ),
-      'messages' => array(
-        $prefix . 'price' => array(
-          'required'  => __('Le prix du produit est obligatoire.', 'wp-product-theme'),
-        ),
-      )
-    )
   );
 
   return $meta_boxes;
 }
-add_filter('rwmb_meta_boxes', 'wppt_produit_register_meta_boxes');
+add_filter('rwmb_meta_boxes', 'wppt_product_register_meta_boxes');
+
+function wppt_edit_product_columns($columns) {
+  $columns = array(
+    'cb'              => '<input type="checkbox" />',
+    'title'           => __("Produits", 'wp-product-theme'),
+    'ref'             => __("Ref.", 'wp-product-theme'),
+    'taxonomy-range'  => __("Gammes", 'wp-product-theme'),
+    'date'            => __('Date')
+  );
+
+  return $columns;
+}
+add_filter('manage_edit-product_columns', 'wppt_edit_product_columns');
+
+function wppt_manage_product_columns($column, $post_id) {
+  global $post;
+
+  switch ($column) {
+
+    case 'ref' :
+      $ref = get_post_meta($post_id, '_pr_ref', true);
+      if (empty($ref))
+        echo "-";
+      else {
+        echo $ref;
+      }
+
+      break;
+
+    default :
+      break;
+  }
+}
+add_action('manage_product_posts_custom_column', 'wppt_manage_product_columns', 10, 2);
