@@ -14,8 +14,8 @@ require_once('helpers/helpers.php');
 require_once('helpers/class-tgm-plugin-activation.php');
 
 // cpt / tax
-require_once('custom-post-types/product.php');
 require_once('custom-post-types/range.php');
+require_once('custom-post-types/product.php');
 
 // hooks
 if (is_super_admin()) {

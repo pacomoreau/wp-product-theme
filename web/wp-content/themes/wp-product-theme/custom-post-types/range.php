@@ -31,7 +31,7 @@ function wppt_register_range() {
     'show_ui'           => true,
     'show_admin_column' => true,
     'query_var'         => true,
-    'rewrite'           => array('slug' => 'range'),
+    'rewrite'           => array('slug' => 'products', 'with_front' => false),
   );
 
   register_taxonomy('range', array('product'), $args);

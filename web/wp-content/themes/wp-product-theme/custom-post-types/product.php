@@ -38,12 +38,34 @@ function wppt_register_product() {
     'exclude_from_search' => true,
     'menu_icon'           => 'dashicons-lightbulb',
     'supports'            => array('title', 'editor', 'thumbnail', 'page-attributes'),
+    'rewrite'             => array(
+      'slug'              => 'products/%range%',
+      'with_front'        => false
+    ),
+    'has_archive' => 'products',
   );
 
   register_post_type('product', $args);
 
 }
 add_action('init', 'wppt_register_product');
+
+/**
+ * Update product permalink.
+ * @param $post_link
+ * @param $post
+ * @return mixed
+ */
+function wppt_product_permalinks($post_link, $post) {
+  if (is_object($post) && $post->post_type == 'product') {
+    $terms = wp_get_object_terms($post->ID, 'range');
+    if ($terms) {
+      return str_replace('%range%', $terms[0]->slug, $post_link);
+    }
+  }
+  return $post_link;
+}
+add_filter('post_type_link', 'wppt_product_permalinks', 1, 2);
 
 /**
  * Metas (meta-box).
